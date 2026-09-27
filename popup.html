@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>本地作业提醒</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>本地作业提醒</h1>
+          <p>仅在这台浏览器中处理数据</p>
+        </div>
+        <span class="privacy-badge">隐私模式</span>
+      </header>
+
+      <section class="card actions">
+        <button id="check-now" class="primary">立即检查</button>
+        <span id="last-run">尚未检查</span>
+      </section>
+
+      <section class="card">
+        <h2>添加课程</h2>
+        <form id="course-form">
+          <label>课程代号（可用“课程 A”）
+            <input id="course-name" maxlength="80" placeholder="课程 A" autocomplete="off">
+          </label>
+          <label>作业模块的完整网址
+            <input id="course-url" type="url" required placeholder="https://example.edu/course/view.php?id=430#section-3" autocomplete="off">
+          </label>
+          <button type="submit">授权并添加</button>
+        </form>
+        <p class="hint">扩展只申请你添加的网站权限，不读取密码。</p>
+      </section>
+
+      <section class="card">
+        <h2>课程</h2>
+        <div id="courses" class="empty">还没有课程</div>
+      </section>
+
+      <section class="card settings">
+        <h2>提醒设置</h2>
+        <label class="row">检查间隔
+          <select id="interval">
+            <option value="5">5 分钟</option>
+            <option value="15">15 分钟</option>
+            <option value="30">30 分钟</option>
+            <option value="60">1 小时</option>
+            <option value="180">3 小时</option>
+          </select>
+        </label>
+        <label class="switch-row">
+          <input id="privacy-mode" type="checkbox" checked>
+          <span>通知中隐藏课程名和作业名</span>
+        </label>
+        <label class="switch-row">
+          <input id="record-enabled" type="checkbox">
+          <span>保存新发布作业到本地</span>
+        </label>
+        <label class="row" id="record-mode-row">记录内容
+          <select id="record-mode">
+            <option value="details">课程、内容和网址</option>
+            <option value="link">仅作业网址</option>
+          </select>
+        </label>
+        <label class="switch-row">
+          <input id="helper-enabled" type="checkbox">
+          <span>同时导出到项目 assignment 文件夹</span>
+        </label>
+        <div class="helper-row">
+          <button id="test-helper" type="button">测试辅助程序</button>
+          <small id="helper-status">尚未连接辅助程序</small>
+        </div>
+        <p class="hint">关闭记录后仍会检查和提醒，但不会新增历史。</p>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <h2>本地记录</h2>
+          <button id="clear-history" class="text-button" type="button">清空</button>
+        </div>
+        <div id="history" class="empty">还没有新作业记录</div>
+      </section>
+
+      <div id="message" role="status" aria-live="polite"></div>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

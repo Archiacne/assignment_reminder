@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "本地作业提醒",
+  "version": "0.2.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtiwpGSI7T5BZcZCAcKzZ9vae5USEgsfSfzKdLtH2/9QYds4llzsgeGW6b6qpJKrp6OfMb7oJEFnzoAO1fsOgda7pJlu/z7SH93/SM7L/zvXuMZFa3GqBM/K2syliO+J9gsO/kPH/XB1gbhBHAoB9h5hhZjY/0lM9vcOIodgpkOnLGBdlZARo7NHKXO9LHeNGZmFca+QHS2LRIE+H27xbScAPpy6NPnrb94kvuK6k6WfBdXjc3tiR+fqLzW2oQy3QTX4aDgwiKNmvgRz0MQLALYipRL1aAU6jZiLvikyk6GXjLvz5DCtsBOtdv9Z/1vF0N3Lp5I1OYFmLHJpfzuu0KQIDAQAB",
+  "minimum_chrome_version": "116",
+  "description": "在本机检查课程页面的新作业；不上传账号、课程或作业信息。",
+  "permissions": [
+    "alarms",
+    "notifications",
+    "offscreen",
+    "storage"
+  ],
+  "optional_permissions": [
+    "nativeMessaging"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "本地作业提醒"
+  }
+}

@@ -1,0 +1,30 @@
+# Exported assignment data (may contain private course information)
+assignment/*
+!assignment/.gitkeep
+
+# Generated native messaging host artifacts
+helper/AssignmentNativeHost.exe
+helper/com.local.assignment_reminder.json
+
+# Browser extension packages and signing keys
+*.crx
+*.pem
+
+# .NET build outputs
+bin/
+obj/
+*.pdb
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Editors and operating systems
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
