@@ -7,4 +7,4 @@ foreach ($registryPath in @(
         Remove-Item -LiteralPath $registryPath -Recurse -Force
     }
 }
-Write-Host '辅助程序注册信息已移除。已导出的 assignment 文件不会被删除。' -ForegroundColor Green
+Write-Host 'Native helper registration removed. Exported assignment files were not deleted.' -ForegroundColor Green
