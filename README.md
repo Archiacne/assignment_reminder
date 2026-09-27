@@ -1,4 +1,4 @@
-# 本地作业提醒
+# Assignment Reminder
 
 一个面向 Moodle 类课程网站的 Edge / Chrome 扩展。扩展会定时检查课程页面中的“作业”章节，在发现新发布的作业时发送系统通知；按需还可以把作业记录导出为项目目录下的 JSON 文件。
 
@@ -7,8 +7,8 @@
 - 支持添加多门课程，每门课程使用独立网址和课程代号。
 - 支持 `/course/view.php?id=430#section-3` 一类课程页面。
 - 优先扫描网址指定的 `#section-3`，没有锚点时自动查找标题为“作业”“课程作业”“Homework”或“Assignments”的章节。
-- 按 5 分钟、15 分钟、30 分钟、1 小时或 3 小时的间隔检查。
-- 首次检查只建立已有作业基线，以后出现新作业时才通知。
+- 按 5 分钟、15 分钟、30 分钟、1 小时或 3 小时的间隔检查是否有新作业发布。
+- 首次检查只显示已有作业数量，以后出现新作业时才通知。
 - 默认启用隐私模式，系统通知不显示课程名和作业名。
 - 可选择不保存详情、仅保存网址，或保存课程代号、作业内容、截止信息和网址。
 - Windows 上可安装本地辅助程序，将新作业导出到 `<项目目录>\assignment`。
@@ -26,12 +26,12 @@
 ### Edge
 
 1. 下载或克隆本项目，并保留完整目录结构。
-2. 在 Edge 地址栏打开 `edge://extensions`。
+2. 在 Edge 右上角地址栏打开 “$\cdots$ -> 扩展 -> 管理扩展”。
 3. 开启页面上的“开发人员模式”。
 4. 点击“加载解压缩的扩展”。
-5. 选择本项目根目录，也就是包含 `manifest.json` 的目录；不要选择某个单独文件或 `helper` 子目录。
-6. 点击 Edge 工具栏上的“扩展”按钮，找到“本地作业提醒”，再点击固定图标。
-7. 点击工具栏上的扩展图标即可打开操作面板。`edge://extensions` 只用于安装和管理，不能在该页面直接使用扩展。
+5. 选择本项目根目录。
+6. 点击 Edge 工具栏上的“扩展”按钮，找到“Assignment Reminder”，再点击“固定到工具栏”。
+7. 点击工具栏上的扩展图标打开操作面板。
 
 ### Chrome
 
@@ -39,20 +39,20 @@
 
 ## 二、添加和检查课程
 
-1. 在准备使用扩展的同一个浏览器用户配置中登录课程网站。
+1. 登录课程网站。
 2. 打开课程的作业章节，并复制地址栏中的完整网址，例如：
 
    ```text
-   https://example.edu/course/view.php?id=430#section-3
+   https://example.edu/course/view.php?id=000#section-3
    ```
 
-3. 打开“本地作业提醒”。
-4. 在“课程代号”中填写不包含真实姓名的简称，例如“课程 A”。
+3. 打开“Assignment Reminder”。
+4. 填写“课程名”。
 5. 粘贴完整网址并点击“授权并添加”。
-6. 浏览器询问网站访问权限时，只批准当前课程网站。
+6. 浏览器询问网站访问权限时，只会批准当前课程网站。
 7. 点击“立即检查”。
 
-首次检查会显示识别到的作业数量，但不会把页面上的旧作业全部当成新作业。以后页面出现新的作业条目时，扩展才会通知并按设置进行记录。
+首次检查会显示识别到的作业数量。以后页面出现新的作业时，扩展才会通知并按设置进行记录。
 
 课程列表中的“打开”可以进入对应课程页面；“删除”会删除该课程配置和 Edge 内部的相关历史。如果同一网站不再有其他课程，扩展还会撤销该网站的访问权限。
 
@@ -71,8 +71,8 @@
 该选项默认关闭。
 
 - 关闭：仍然检查和通知，但不保存新作业标题、说明、截止信息或具体作业网址。
-- “仅作业网址”：保存网址、发现时间和内部课程 ID。
-- “课程、内容和网址”：保存课程代号、作业标题、课程页面上可见的说明文字（最多 1000 字）、截止信息、网址和发现时间。
+- “仅作业网址”：保存网址、发现时间和课程名。
+- “课程、内容和网址”：保存课程名、作业标题、课程页面上可见的说明文字、截止信息、网址和发现时间。
 
 “本地记录”区域显示已经保存的记录。点击“清空”只会清除浏览器内部的作业历史，不会删除辅助程序已经导出的 JSON 文件。
 
@@ -95,7 +95,7 @@
    Native helper installed successfully.
    ```
 
-3. 打开 `edge://extensions`，在“本地作业提醒”卡片上点击“重新加载”。
+3. 打开扩展界面，在“Assignment Reminder”卡片上点击“重新加载”。
 4. 打开扩展面板，先开启“保存新发布作业到本地”。
 5. 开启“同时导出到项目 assignment 文件夹”。
 6. Edge 询问“与本机应用通信”权限时选择允许。
@@ -115,9 +115,6 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\helper\install.ps1"
 2. 生成仅供本机使用的 `helper/com.local.assignment_reminder.json`；
 3. 注册当前用户的 `com.local.assignment_reminder` Native Messaging 主机；
 4. 创建 `<项目目录>\assignment` 输出目录；
-5. 清理早期 `homework_reminder` 版本遗留的注册项。
-
-生成的 EXE、Native Messaging 主机清单和导出的作业 JSON 已由 `.gitignore` 排除，不会被正常的 Git 提交包含。
 
 ### 移动项目后的处理
 
@@ -155,12 +152,12 @@ Specified native messaging host not found
 
 | 使用方式 | 保存位置 | 内容 |
 | --- | --- | --- |
-| 始终保存 | Edge 的 `chrome.storage.local` | 课程代号、课程页面网址、检查状态和用于去重的短哈希 |
+| 始终保存 | Edge 的 `chrome.storage.local` | 课程名、课程网址 |
 | 开启浏览器本地记录 | Edge 的 `chrome.storage.local` | 根据记录模式保存新作业网址或完整记录 |
-| 同时启用辅助程序 | `<项目目录>\assignment` | 每项新作业一个 JSON 文件，同时保留 Edge 内部记录作为失败兜底 |
+| 同时启用辅助程序 | `<项目目录>\assignment` | 每项新作业一个 JSON 文件，同时保留 Edge 内部记录 |
 | 通知点击目标 | `chrome.storage.session` | 临时保存，浏览器会话结束后清除 |
 
-`chrome.storage.local` 中的 `chrome` 是 Chromium 扩展 API 的名称，不代表数据存入 Google Chrome。Edge 中的底层文件通常位于：
+Edge 中的底层文件通常位于：
 
 ```text
 %LOCALAPPDATA%\Microsoft\Edge\User Data\<配置名称>\Local Extension Settings\<扩展ID>\
@@ -174,7 +171,7 @@ Specified native messaging host not found
 
 1. 在当前项目目录重新运行 `install-helper.cmd`。
 2. 确认安装窗口显示成功信息。
-3. 在 `edge://extensions` 中重新加载扩展。
+3. 在扩展界面中重新加载扩展。
 4. 再次点击“测试辅助程序”。
 5. 如果错误仍存在，彻底退出 Edge 后重新打开。
 
@@ -186,28 +183,23 @@ Specified native messaging host not found
 
 ### 扩展显示“需要登录”
 
-请在安装扩展的同一个 Edge 用户配置中打开课程网站并重新登录，然后再次点击“立即检查”。扩展不会保存或填写账号、密码。
+请在安装扩展的同一个 Edge 用户配置中打开课程网站并重新登录，然后再次点击“立即检查”。
 
 ### 显示“未找到作业项”
 
-确认粘贴的网址包含正确的章节锚点，例如 `#section-3`。如果学校修改过 Moodle 页面结构，需要使用脱敏后的作业区域 HTML 进一步适配；不要提供账号、Cookie、姓名、学号或真实课程数据。
+确认粘贴的网址包含正确的章节锚点，例如 `#section-3`。
 
 ### 没有收到自动提醒
 
 - 确认 Edge 没有完全退出。
 - 检查 Windows 是否允许 Edge 发送通知。
 - 确认课程状态不是“需要登录”或“检查失败”。
-- 首次检查只建立基线，不会通知已有旧作业。
-
-### 清空记录后 JSON 文件仍存在
-
-这是预期行为。“清空”只删除 Edge 内部历史；`assignment` 中的文件需要由用户自行删除。
 
 ## 七、卸载
 
 ### 卸载辅助程序
 
-双击项目根目录中的 `uninstall-helper.cmd`，或运行：
+双击项目根目录中的 `uninstall-helper.cmd`，或在 powershell 中运行：
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\helper\uninstall.ps1"
@@ -217,7 +209,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\helper\uninstall.ps1"
 
 ### 卸载扩展
 
-在 `edge://extensions` 或 `chrome://extensions` 中移除“本地作业提醒”。浏览器内部的扩展存储通常会随扩展删除，但辅助程序导出的 JSON 文件不会自动删除。
+在扩展中移除“本地作业提醒”。浏览器内部的扩展存储通常会随扩展删除，但辅助程序导出的 JSON 文件不会自动删除。
 
 ## 隐私与安全
 
@@ -231,19 +223,19 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\helper\uninstall.ps1"
 
 ## 开发与验证
 
-修改扩展代码后，在扩展管理页面点击“重新加载”。修改 `AssignmentNativeHost.cs` 或移动项目后，需要重新运行 `install-helper.cmd`。
+若自己再开发，修改扩展代码后，在扩展管理页面点击“重新加载”。修改 `AssignmentNativeHost.cs` 或移动项目后，需要重新运行 `install-helper.cmd`。
 
 仓库中的主要文件：
 
 ```text
-manifest.json                    扩展清单
+manifest.json                   扩展清单
 background.js                   定时检查、通知和本地记录
 offscreen.js                    课程页面 DOM 解析
 popup.html / popup.js           扩展操作界面
 helper/AssignmentNativeHost.cs  本地 JSON 导出辅助程序源码
 helper/install.ps1              编译并注册辅助程序
 helper/uninstall.ps1            移除辅助程序注册
-assignment/                     本地 JSON 导出目录（内容不会提交）
+assignment/                     本地 JSON 导出目录
 ```
 
 ## License
